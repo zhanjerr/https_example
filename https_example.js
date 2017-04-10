@@ -3,13 +3,17 @@ var https = require("https");
 // console.log("I did it!");
 
 var options ={
-  host: "www.example.org",
-  path: "/"
+  host: "stream-large-file.herokuapp.com",
+  path: "/give-me-stuff-now"
 }
 
 var callback = function (response) {
   console.log("In response handler callback!");
-  console.log("Response: ", response);
+  // console.log("Response: ", response);
+  response.on("data", function(chunk){
+    console.log('[-- CHUNK OF LENGTH ' + chunk.length + ' --]');
+    console.log(chunk.toString());
+  })
 }
 
 console.log("I'm about to make the request!");
